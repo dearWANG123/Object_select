@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <style type="text/css">
+        #box,#box2{margin-bottom: 20px;}
+        #box input.current,#box2 input.current{background:red;}
+        #box div,#box2 div{width:100px;height:100px;font-size: 20px;text-align: center;line-height: 100px;border:1px solid #f00;display:none;}
+        #box div.show,#box2 div.show{display:block;}
+        </style>
+    </head>
+    <body>
+    <div id="box">
+        <input type="button" value="按钮1" class="current"/>
+        <input type="button" value="按钮2" />
+        <input type="button" value="按钮3" />
+        <div class="show">内容一</div>
+        <div>内容二</div>
+        <div>内容三</div>
+    </div>
+    <div id="box2">
+        <input type="button" value="按钮1" class="current"/>
+        <input type="button" value="按钮2" />
+        <input type="button" value="按钮3" />
+        <div class="show">内容一</div>
+        <div>内容二</div>
+        <div>内容三</div>
+    </div>
+    <input type="button" value="第一个按钮让第一个停" id="btn1_1" />
+    <input type="button" value="第二个按钮让第一个开" id="btn1_2"/>
+    <input type="button" value="第三个按钮让第二个开" id="btn1_3" />
+    <input type="button" value="第四个按钮开的关,关的开" id="btn1_4"/>
+    <script type="text/javascript">
+    
+    function Tab(id){
+        this.box=document.getElementById(id);
+        this.btns=this.box.getElementsByTagName("input");
+        this.divs=this.box.getElementsByTagName("div");
+    }
+    Tab.prototype.init=function(){
+        var _this=this;
+        // console.log(this);
+        for(var i=0;i<this.btns.length;i++){
+            (function(index){
+                // console.log(_this);
+                _this.btns[index].addEventListener("click",function(){
+                console.log(_this);
+                    _this.Fn(index);
+                });
+            })(i)
+        }
+    }
+    
+    Tab.prototype.Fn=function(index){
+        for(var i=0;i<this.btns.length;i++){
+            this.btns[i].className="";
+            this.divs[i].className="";
+        }
+        this.btns[index].className="current";
+        this.divs[index].className="show";
+    }
+
+    Tab.prototype.Stop=function(){
+        alert(1);
+
+
+
+
+    }
+    var t=new Tab("box");
+    var t2=new Tab("box2");
+    t.init();
+    t2.init();
+
+    var btn1_1=document.getElementById("btn1_1");
+    var btn1_2=document.getElementById("btn1_2");
+    var btn1_3=document.getElementById("btn1_3");
+    var btn1_4=document.getElementById("btn1_4");
+
+    btn1_1.onclick=function(){
+        t.Stop();
+    }
+    btn1_2.onclick=function(){
+
+    }
+    btn1_3.onclick=function(){
+
+    }
+    btn1_4.onclick=function(){
+
+    }
+    </script>
+    </body>
+</html>
